@@ -1,0 +1,250 @@
+{
+  "ConstuctionInfo": {
+    "Teeth": {
+      "Tooth": {
+        "Number": "25",
+        "ReconstructionType": "AnatomicWaxup",
+        "ParametersUsed": {
+          "Parameter": {
+            "Value": "NaN",
+            "MinValue": "NaN",
+            "MaxValue": "NaN",
+            "StepSize": "",
+            "Type": "DuplicateDentureMode"
+          }
+        },
+        "ImplantType": "None",
+        "FreeformScanPerformed": "false",
+        "CutbackPerformed": "false",
+        "Margin": {
+          "Vec3": {
+            "x": "6.787448446892711",
+            "y": "7.161477055715234",
+            "z": "1.3020858608447918"
+          }
+        },
+        "MarginBottomType": "CrownBottom",
+        "AxisInsertionScanInfo": {
+          "x": "0.10854307562112808",
+          "y": "-0.014182517305016518",
+          "z": "-0.9939906001091003"
+        },
+        "AxisInsertionWasCheckedOrDefined": "true",
+        "Axis": {
+          "x": "1.3877787807814457E-17",
+          "y": "0",
+          "z": "1.0000000280838248"
+        },
+        "AxisOcclusalOfToothModel": {
+          "x": "-0.06562006923997077",
+          "y": "-0.057317789216587214",
+          "z": "0.9961971077815195"
+        },
+        "AxisMesial": {
+          "x": "-0.9835750417393003",
+          "y": "0.17197499408373262",
+          "z": "-0.0548154966905675"
+        },
+        "AxisBuccal": {
+          "x": "0.16817908656308975",
+          "y": "0.9834316122045478",
+          "z": "0.06766135499358933"
+        },
+        "ToothLibraryName": "Grin Design 2",
+        "ToothLibraryToothNumber": "25",
+        "ToothModelFilename": "C:\\Users\\LAPTOP PC WORLD\\Downloads\\exocad-DentalCAD3.2-FR-2024-09-27\\DentalCADApp\\library\\pontics\\Grin Design 2\\upperjaw\\5.eoff",
+        "ToothModelMatrix": {
+          "_00": "-0.8934235248392073",
+          "_01": "0.15621228327088899",
+          "_02": "-0.04979127431497317",
+          "_03": "0",
+          "_10": "0.14054553422670518",
+          "_11": "0.8749637224392892",
+          "_12": "0.0805692273930589",
+          "_13": "0",
+          "_20": "-0.0619928209197797",
+          "_21": "-0.05414944633556718",
+          "_22": "0.9411306828045793",
+          "_23": "0",
+          "_30": "3.8241446818941984",
+          "_31": "8.269010475122727",
+          "_32": "1.1452394883748553",
+          "_33": "1"
+        },
+        "Center": {
+          "x": "4.110437618755217",
+          "y": "8.484710665279119",
+          "z": "1.0095906507283834"
+        },
+        "ZRotationMatrix": {
+          "_00": "-0.9605192014905066",
+          "_01": "0.256166479002406",
+          "_02": "0.10854307257282345",
+          "_03": "0",
+          "_10": "0.256166479002406",
+          "_11": "0.9665286292964634",
+          "_12": "-0.014182516906717197",
+          "_13": "0",
+          "_20": "-0.10854307257282345",
+          "_21": "0.014182516906717197",
+          "_22": "-0.9939905721940432",
+          "_23": "0",
+          "_30": "5.540412776142497",
+          "_31": "-0.7239245767168985",
+          "_32": "7.343726428445745",
+          "_33": "1"
+        },
+        "ToothColor": "---",
+        "ToothScanFileName": "lamyaa_ratmi_2026-01-22_Dt malek-UpperJaw.stl",
+        "DebugToothInformation": {
+          "DebugAxisInsertionDefinedByUser": {
+            "x": "1.3877787807814457E-17",
+            "y": "0",
+            "z": "1.0000000280838248"
+          },
+          "DebugAxisInsertionEstimatedBySoftware": {
+            "x": "0.05892844361496835",
+            "y": "0.06585960511359197",
+            "z": "0.9960872618040577"
+          },
+          "DebugAxisInsertionInfo": "T=CrownPreparation;V=1;UserCorrection[Ang=5.1;AngM=2.7;AngB=4.3;]",
+          "DebugInstantAnatomicMorphingInfo": "InstantAnatomicMorphing;FeatureFreeforming;"
+        }
+      }
+    },
+    "MatrixToScanDataFiles": {
+      "_00": "1",
+      "_01": "0",
+      "_02": "0",
+      "_03": "0",
+      "_10": "0",
+      "_11": "1",
+      "_12": "0",
+      "_13": "0",
+      "_20": "0",
+      "_21": "0",
+      "_22": "1",
+      "_23": "0",
+      "_30": "0",
+      "_31": "0",
+      "_32": "0",
+      "_33": "1"
+    },
+    "ProductName": "exocad DentalCAD 3.2 Elefsina 8820 [DentalCAD-Version 3.2 Engine build 8820]",
+    "EngineBuildString": "DentalCAD-Version 3.2 Elefsina Engine build 8820 (2024-02-24)",
+    "SaveTime": "202601221550",
+    "EngineBuild": "8820",
+    "EngineBuildHistory": {
+      "EngineBuildHistoryToken": "EngineBuild(9036),ModernUI(True),DevType(Internal),ProductName(exocad DentalCAD 3.2 Elefsina 9036 [DentalCAD-Version 3.2 Engine build 9036])"
+    },
+    "ProjectName": "lamyaa_ratmi_2026-01-22_Dt malek",
+    "ProjectDir": "C:\\Users\\LAPTOP PC WORLD\\Desktop\\H.H\\lamyaa_ratmi_2026-01-22_Dt malek",
+    "IsProjectFileLoaded": "true",
+    "ProjectFileOriginallyLoaded": "C:\\Users\\LAPTOP PC WORLD\\Downloads\\exocad-DentalCAD3.2-FR-2024-09-27\\CAD-Data\\lamyaa_ratmi_2026-01-22_Dt malek\\lamyaa_ratmi_2026-01-22_Dt malek.dentalProject",
+    "LoadedSceneFileName": "C:\\Users\\LAPTOP PC WORLD\\Desktop\\H.H\\lamyaa_ratmi_2026-01-22_Dt malek\\lamyaa_ratmi_2026-01-22_Dt malek.dentalCAD",
+    "DentalDBBuildDate": "2024-09-27",
+    "DentalDBProductName": "exocad DentalDB 3.2 Elefsina 9036 [Version 3.2 Engine build 9036] [<64-Bit>]",
+    "DatabaseGUID": "6b05413b-0c46-41d2-a3d1-a558ec3c5339",
+    "WorkParamsSHA": "bipS9FTAfoYDjMWSevzXjEB/GhA=",
+    "ProjectGUID": "f1d80707-23a9-42a1-9a0b-28292548093a",
+    "WorkParamsSignature": "",
+    "DesignGUID": "bf51bbd5-ee4d-46ff-8834-7eae6d81e26c",
+    "DentalProjectFileHashSHA256": "c0783f2a8b4ad67bce3c7a8da9a3ca38b5d6a28910a79048b0d50d7b24ddc2cb",
+    "CID": "6",
+    "PPU": "false",
+    "EncryptedOutput": "false",
+    "ScanDataPlugins": "",
+    "ScanFiles": {
+      "ScanFile": {
+        "FileName": "lamyaa_ratmi_2026-01-22_Dt malek-UpperJaw.stl",
+        "FileHash": "17e0222780ff01ed641be75115ea898a5db0b039",
+        "LoadedBy": "DentalProjectFileReader(1)",
+        "TransformationMatrix": {
+          "_00": "1",
+          "_01": "0",
+          "_02": "0",
+          "_03": "0",
+          "_10": "0",
+          "_11": "1",
+          "_12": "0",
+          "_13": "0",
+          "_20": "0",
+          "_21": "0",
+          "_22": "1",
+          "_23": "0",
+          "_30": "0",
+          "_31": "0",
+          "_32": "0",
+          "_33": "1"
+        },
+        "PartType": "UnsegmentedJaw",
+        "PartName": "Tooth 25 - Jaw scan",
+        "ToothNumbers": {
+          "int": "25"
+        },
+        "DirectionToOppositJaw": {
+          "x": "0",
+          "y": "0",
+          "z": "-1"
+        },
+        "TransformationHasArticulatorOrientationAssumed": "false"
+      }
+    },
+    "PatientId": "7",
+    "PracticeId": "23",
+    "TechnicianId": "",
+    "Notes": "",
+    "ConstructionFileList": {
+      "ConstructionFile": {
+        "Filename": "lamyaa_ratmi_2026-01-22_Dt malek-25-waxup_slm_cad.stl",
+        "Material": "ZI",
+        "MaterialName": "Zirconia",
+        "MaterialPostfix": "",
+        "MaterialColor": "---",
+        "Height": "8.03187570086915",
+        "FileHashSHA1": "D54C999D05D93F2C9EB408BF21B615D696AABD54",
+        "FileHashSHA256": "bdcf31c4104b08e34ee8124584f4003f23e67e51db2f4d8b23cc9c7f908dc686",
+        "ReconstructionTypeHashSHA1": "791E4CA08F2B599044A9010A5508976604309669",
+        "ParameterHashSHA1": "E7C604598F3706CBAFAC844D09F6A3A1858BA7C2",
+        "ToothNumbers": {
+          "int": "25"
+        },
+        "PartType": "MergedWaxupSLM",
+        "PartName": "Tooth 25 (Anatomic waxup) - Merged Waxup",
+        "SaveTime": "202601221550",
+        "ZRotationMatrix": {
+          "_00": "-0.9605192014905066",
+          "_01": "0.256166479002406",
+          "_02": "0.10854307257282345",
+          "_03": "0",
+          "_10": "0.256166479002406",
+          "_11": "0.9665286292964634",
+          "_12": "-0.014182516906717197",
+          "_13": "0",
+          "_20": "-0.10854307257282345",
+          "_21": "0.014182516906717197",
+          "_22": "-0.9939905721940432",
+          "_23": "0",
+          "_30": "5.540412776142497",
+          "_31": "-0.7239245767168985",
+          "_32": "7.343726428445745",
+          "_33": "1"
+        },
+        "ExportInformation": "RotateToAxisInsertion",
+        "SLMOptimized": "true",
+        "EstimatedDirectionForCAM": {
+          "x": "0",
+          "y": "0",
+          "z": "1"
+        },
+        "EstimatedAlignmentDirectionForCAM": {
+          "x": "0.9783711532425202",
+          "y": "-0.1755961781939092",
+          "z": "-0.10934289508968566"
+        },
+        "IsScrewRetained": "false"
+      }
+    },
+    "ConstructionFileCount": "1"
+  }
+}
