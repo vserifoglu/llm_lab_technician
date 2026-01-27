@@ -44,9 +44,3 @@ The dataset consists of Exocad project folders. Each case contains inputs (geome
     *   Data structure understood.
     *   Alignment transformation mathematically solved and verified (0.0195mm mean error).
     *   Next steps: implementing the training pipeline.
-
-## 6. Instructions for Future AI Agents
-If you are reading this to assist on the project:
-1.  **Do not reinvent the alignment logic.** Use the transpose method described above.
-2.  **Data Path**: Look in `data/` for patient case subfolders.
-3.  **Target**: We are training a model (likely PointNet, DGCNN, or 3D UNet) to predict the specialized curve (margin) on the mesh surface.
