@@ -158,29 +158,45 @@ Examples:
         # Offset lower jaw to the right for side-by-side view
         lower_offset = (70, 0, 0)  # 70mm separation
     
-    # Register meshes (transform to design space for visualization)
+    # Prepare scanner-space teeth for visualization
+    upper_teeth_scanner = []
+    for t in upper_teeth:
+        t_copy = t.copy()
+        inv_mat = np.linalg.inv(t["transform_matrix"])
+        t_copy["margin_points"] = transform_points(t["margin_points"], inv_mat)
+        upper_teeth_scanner.append(t_copy)
+
+    lower_teeth_scanner = []
+    for t in lower_teeth:
+        t_copy = t.copy()
+        inv_mat = np.linalg.inv(t["transform_matrix"])
+        t_copy["margin_points"] = transform_points(t["margin_points"], inv_mat)
+        lower_teeth_scanner.append(t_copy)
+
+    # Register meshes (Scanner Space)
     if upper_mesh and upper_teeth and args.jaw in ["upper", "both"]:
-        upper_mesh.apply_transform(upper_teeth[0]["transform_matrix"])
+        # Mesh is already in Scanner Space, no transform needed
         register_jaw("UpperJaw", upper_mesh, 
                      color=(0.9, 0.85, 0.8), 
                      offset=upper_offset)
-        register_margins(upper_teeth, distances, offset=upper_offset)
+        register_margins(upper_teeth_scanner, distances, offset=upper_offset)
     
     if lower_mesh and lower_teeth and args.jaw in ["lower", "both"]:
-        lower_mesh.apply_transform(lower_teeth[0]["transform_matrix"])
+        # Mesh is already in Scanner Space, no transform needed
         register_jaw("LowerJaw", lower_mesh, 
                      color=(0.8, 0.85, 0.9), 
                      offset=lower_offset)
-        register_margins(lower_teeth, distances, offset=lower_offset)
+        register_margins(lower_teeth_scanner, distances, offset=lower_offset)
     
     # Focus camera
     if args.jaw == "upper":
-        focus_on_margins(upper_teeth)
+        focus_on_margins(upper_teeth_scanner)
     elif args.jaw == "lower":
-        focus_on_margins(lower_teeth)
+        focus_on_margins(lower_teeth_scanner)
     else:
         # For both, focus between them
-        focus_on_margins(teeth_to_show, offset=(35, 0, 0))
+        all_scanner = upper_teeth_scanner + lower_teeth_scanner
+        focus_on_margins(all_scanner, offset=(35, 0, 0))
     
     print(f"\n  Launching viewer (jaw: {args.jaw})...")
     show(screenshot_path=args.screenshot)

@@ -24,7 +24,7 @@ def register_jaw(
     name: str,
     mesh,
     color: tuple = (0.85, 0.85, 0.88),
-    transparency: float = 0.5,
+    transparency: float = 0.9,
     offset: tuple = (0, 0, 0)
 ):
     """
@@ -65,7 +65,7 @@ def register_margins(
     teeth: list,
     distances: dict = None,
     offset: tuple = (0, 0, 0),
-    line_radius: float = 0.005
+    line_radius: float = 0.0008
 ):
     """
     Add margin curves for multiple teeth to the scene.
