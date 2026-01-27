@@ -31,7 +31,7 @@ import sys
 # Add scripts directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
 
-from dental_utils import load_teeth, load_mesh, compute_distances, transform_points
+from dental_utils import load_teeth, load_mesh, compute_distances, transform_points, classify_vertices
 from viz_utils import (
     setup_scene, register_jaw, register_margins, 
     focus_on_margins, show, print_report
@@ -174,18 +174,41 @@ Examples:
         lower_teeth_scanner.append(t_copy)
 
     # Register meshes (Scanner Space)
+    # Register meshes (Scanner Space)
+    jaw_color = np.array([0.7, 0.7, 0.7]) # Gray jaw
+    gum_color = np.array([0.9, 0.6, 0.6]) # Pinkish gum
+    tooth_color = np.array([0.9, 0.9, 0.2]) # Yellow tooth
+
     if upper_mesh and upper_teeth and args.jaw in ["upper", "both"]:
-        # Mesh is already in Scanner Space, no transform needed
+        # Classify vertices
+        labels = classify_vertices(upper_mesh, upper_teeth)
+        
+        # Create color array
+        # Initialize with Jaw Color (0)
+        colors = np.tile(jaw_color, (len(labels), 1))
+        # Apply Tooth Color (1)
+        colors[labels == 1] = tooth_color
+        # Apply Gum Color (2)
+        colors[labels == 2] = gum_color
+        
         register_jaw("UpperJaw", upper_mesh, 
-                     color=(0.9, 0.85, 0.8), 
-                     offset=upper_offset)
+                     color=(0.7, 0.7, 0.7), 
+                     offset=upper_offset,
+                     vertex_colors=colors)
         register_margins(upper_teeth_scanner, distances, offset=upper_offset)
     
     if lower_mesh and lower_teeth and args.jaw in ["lower", "both"]:
-        # Mesh is already in Scanner Space, no transform needed
+        # Classify vertices
+        labels = classify_vertices(lower_mesh, lower_teeth)
+        
+        colors = np.tile(jaw_color, (len(labels), 1))
+        colors[labels == 1] = tooth_color
+        colors[labels == 2] = gum_color
+
         register_jaw("LowerJaw", lower_mesh, 
-                     color=(0.8, 0.85, 0.9), 
-                     offset=lower_offset)
+                     color=(0.7, 0.7, 0.7), 
+                     offset=lower_offset,
+                     vertex_colors=colors)
         register_margins(lower_teeth_scanner, distances, offset=lower_offset)
     
     # Focus camera

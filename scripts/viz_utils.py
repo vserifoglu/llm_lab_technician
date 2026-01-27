@@ -25,7 +25,8 @@ def register_jaw(
     mesh,
     color: tuple = (0.85, 0.85, 0.88),
     transparency: float = 0.9,
-    offset: tuple = (0, 0, 0)
+    offset: tuple = (0, 0, 0),
+    vertex_colors: np.ndarray = None
 ):
     """
     Add a jaw mesh to the scene.
@@ -33,9 +34,10 @@ def register_jaw(
     Args:
         name: Display name (e.g., "UpperJaw")
         mesh: trimesh.Trimesh object
-        color: RGB tuple (0-1 range)
+        color: RGB tuple (0-1 range), used if vertex_colors is None
         transparency: 0=opaque, 1=invisible
         offset: (x, y, z) translation for side-by-side layout
+        vertex_colors: Optional (N, 3) array of RGB colors for each vertex
     
     Returns:
         Polyscope mesh object
@@ -45,7 +47,7 @@ def register_jaw(
     if offset != (0, 0, 0):
         vertices = vertices + np.array(offset)
     
-    return ps.register_surface_mesh(
+    ps_mesh = ps.register_surface_mesh(
         name,
         vertices,
         mesh.faces,
@@ -53,6 +55,11 @@ def register_jaw(
         transparency=transparency,
         smooth_shade=True
     )
+
+    if vertex_colors is not None:
+        ps_mesh.add_color_quantity("Semantic Colors", vertex_colors, enabled=True)
+        
+    return ps_mesh
 
 
 def generate_tooth_color(tooth_number: int) -> tuple:
@@ -65,7 +72,8 @@ def register_margins(
     teeth: list,
     distances: dict = None,
     offset: tuple = (0, 0, 0),
-    line_radius: float = 0.0008
+    line_radius: float = 0.0009,
+    fixed_color: tuple = (0.0, 0.0, 0.8)
 ):
     """
     Add margin curves for multiple teeth to the scene.
@@ -96,14 +104,14 @@ def register_margins(
         edges = np.array([[i, (i + 1) % n] for i in range(n)])
         
         name = f"Tooth {tooth['number']} ({tooth['jaw'][0].upper()})"
-        color = generate_tooth_color(tooth["number"])
+        # color = generate_tooth_color(tooth["number"])
         
         ps_curve = ps.register_curve_network(
             name,
             margin,
             edges,
             radius=line_radius,
-            color=color
+            color=fixed_color
         )
         
         # Add distance coloring if provided

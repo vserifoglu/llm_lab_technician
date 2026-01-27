@@ -124,3 +124,107 @@ def transform_points(points: np.ndarray, matrix: np.ndarray) -> np.ndarray:
     transformed = pts_homogeneous @ matrix.T
     # Return just xyz (drop the w component)
     return transformed[:, :3]
+
+
+def classify_vertices(mesh: trimesh.Trimesh, teeth: list) -> np.ndarray:
+    """
+    Classify vertices as Gum (0) or Tooth (1) based on margin geometry.
+    
+    Args:
+        mesh: The jaw mesh (in Scanner Space)
+        teeth: List of tooth dicts (must contain 'transform_matrix' and 'margin_points' in Design Space)
+        
+    Returns:
+        np.ndarray: Integer array of shape (N,) where 1=Tooth, 0=Gum
+    """
+    vertices = mesh.vertices
+    labels = np.zeros(len(vertices), dtype=int)
+    
+    for tooth in teeth:
+        if len(tooth["margin_points"]) < 3:
+            continue
+            
+        # The transform_matrix in tooth dict is (M^T), which aligns Scanner -> Design.
+        # See load_teeth: transform_matrix = mat.T
+        scanner_to_design = tooth["transform_matrix"]
+        
+        # Optimization: Filter by distance to Centroid
+        # The matrix origin (0,0,0) is NOT the tooth center (offset by ~30mm).
+        # Use the mean of the margin points (in Design Space) as the centroid.
+        margin_design = tooth["margin_points"]
+        centroid_design = np.mean(margin_design, axis=0)
+        
+        # Transform centroid to Scanner Space for filtering
+        inv_mat = np.linalg.inv(scanner_to_design)
+        
+        # Note: transform_points expects (N,3) array
+        centroid_scanner = transform_points(centroid_design.reshape(1, 3), inv_mat)[0]
+        
+        # Fast distance check (15mm radius captures most teeth)
+        dists = np.linalg.norm(vertices - centroid_scanner, axis=1)
+        nearby_indices = np.where(dists < 15.0)[0]
+        
+        if len(nearby_indices) == 0:
+            continue
+            
+        nearby_verts = vertices[nearby_indices]
+        
+        # Transform candidates to Design Space
+        verts_design = transform_points(nearby_verts, scanner_to_design)
+        
+        # Cylindrical/Radial Check
+        # Instead of a global min_z, we compare with the NEAREST margin point's Z.
+        # This handles the undulating margin line correctly.
+        
+        # 1. Broad radial filter (Cylinder footprint)
+        # Vertices must be roughly within the margin's XY footprint
+        margin = margin_design
+        margin_radii = np.linalg.norm(margin[:, :2], axis=1)
+        max_radius = np.max(margin_radii) * 1.2  # 20% buffer for gum area
+        
+        verts_radii = np.linalg.norm(verts_design[:, :2], axis=1)
+        in_cylinder = verts_radii < max_radius
+        
+        if not np.any(in_cylinder):
+            continue
+            
+        # 2. Precise Z-check against nearest margin point
+        # We only care about vertices in the cylinder
+        candidates_idx = np.where(in_cylinder)[0]
+        candidates_design = verts_design[candidates_idx]
+        
+        # Find nearest margin point for each candidate (using XY distance only)
+        # Broadcast: (M, 1, 2) - (1, P, 2)
+        dists_xy = np.linalg.norm(
+            margin[:, :2].reshape(-1, 1, 2) - candidates_design[:, :2].reshape(1, -1, 2),
+            axis=2
+        )
+        nearest_margin_idx = np.argmin(dists_xy, axis=0)
+        nearest_margin_z = margin[nearest_margin_idx, 2]
+        
+        # 3. Classify
+        # Tooth (1): Z > Nearest Margin Z
+        # Gum (2): Z <= Nearest Margin Z (but inside cylinder)
+        is_tooth = candidates_design[:, 2] > nearest_margin_z
+        
+        # Map back to global indices
+        global_indices = nearby_indices[candidates_idx]
+        
+        # Update labels (prioritize Tooth over Gum over Jaw)
+        # If already marked as Tooth (1) by another tooth (rare overlap), keep it.
+        # If currently 0, set to new label.
+        current_labels = labels[global_indices]
+        
+        new_labels = np.full(len(candidates_idx), 2) # Default to Gum
+        new_labels[is_tooth] = 1 # Set Tooth
+        
+        # Only update where we have a "stronger" or equal classification? 
+        # Actually, just overwrite 0s. 
+        # If overlap: Tooth wins over Gum.
+        mask_update = (current_labels == 0) | ((current_labels == 2) & (new_labels == 1))
+        
+        labels[global_indices[mask_update]] = new_labels[mask_update]
+        
+    return labels
+        
+    return labels
