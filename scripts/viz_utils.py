@@ -18,7 +18,6 @@ def setup_scene(title: str = "Dental Visualization"):
     ps.init()
     ps.set_up_dir("z_up")
     ps.set_ground_plane_mode("none")
-    ps.set_window_title(title)
 
 
 def register_jaw(
@@ -66,7 +65,7 @@ def register_margins(
     teeth: list,
     distances: dict = None,
     offset: tuple = (0, 0, 0),
-    line_radius: float = 0.015
+    line_radius: float = 0.005
 ):
     """
     Add margin curves for multiple teeth to the scene.
