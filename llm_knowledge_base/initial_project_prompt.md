@@ -7,7 +7,7 @@
 
 ## 2. Domain Context: The Dental Workflow
 1.  **Input**: Dentist sends a physical impression or intraoral scan of the patient's teeth.
-2.  **Digitization**: Lab technician scans the model (if physical) to create a 3D digital version (`Scanner Space`).
+2.  **Digitization**: Lab technician scans the model to create a 3D digital version (`Scanner Space`).
 3.  **The Bottleneck (Task to Automate)**:
     - Designer opens the scan in CAD software (Exocad).
     - **Action**: Manually identifying and drawing the **Margin Line** (the precise edge between the prepared tooth and the gum).
@@ -27,20 +27,11 @@ The dataset consists of Exocad project folders. Each case contains inputs (geome
 | **Alignment** | `*.constructionInfo` | XML containing `ZRotationMatrix`. | *Bridge* |
 | **Metadata** | `*.dentalProject` | Links files and contains project info. | N/A |
 
-## 4. Technical Challenges & Solutions
+## 4. Coordinate Spaces (Context)
 
-### The Alignment Problem
-*   **Issue**: The Input Mesh (`UpperJaw.stl`) is in **Scanner Space**, but the Label (`Margin` points) is saved in **Design Space** (local to the tooth). They do not overlap in 3D space by default.
-*   **The Trap**: The `ZRotationMatrix` provided in the XML is stored using a **Row-Vector Convention** (Translation is in the bottom row), whereas standard Python libraries (numpy/trimesh) expect a Column-Vector convention.
-*   **The Solution**:
-    1.  Load the `ZRotationMatrix` from `<constructionInfo>`.
-    2.  **Transpose** the matrix ($M^T$).
-    3.  Apply $M^T$ to the `UpperJaw.stl` mesh vertices.
-    4.  Result: The mesh is now perfectly aligned with the margin line points.
+| Space | Description |
+|-------|-------------|
+| **Scanner Space** | Raw mesh coordinates from 3D scanner |
+| **Design Space** | Local tooth coordinates where margin points are stored |
 
-## 5. Current Project State
-*   **Phase**: Data Engineering & Preparation.
-*   **Status**:
-    *   Data structure understood.
-    *   Alignment transformation mathematically solved and verified (0.0195mm mean error).
-    *   Next steps: implementing the training pipeline.
+**Note**: The `ZRotationMatrix` in `constructionInfo` transforms between these spaces. This alignment is already implemented and verified (mean error: 0.02mm).
