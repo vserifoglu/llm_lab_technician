@@ -1,0 +1,38 @@
+- The whiteness basically is just a visualization that exocad provides, nothing more. Here is the step that I missed from the workflow: 
+
+Regarding the whiteness, here is the clear workflow: 
+
+Once the jaw copy comes from the dentist. The lab technician scanns it, and opens its stl files upper/lower Jaw in exocad. Then he checks the prepped teeth. As I found out, the technician is checking if the teeth is prepped well, checking if the doctor did dig a tiny space below the gum where the zircoun is going to sit. Once the first check is done, the technician creates a sort of ridge or empty pathage between the prepped tooth and the gum where the replaced tooth (the zircon) is gonna sit. Once the technician is done with that, it sends it again to the scanner to get a new digital copy with the new modification. Then the designer gets the new digital copy and starts working on the margin, then the actual ziron teeth. Therefore, the whiteness is merly a visualization coloring the exocad is adding to help the designer with drawing the margins. At the end of the day, the edge that the technician or the pathage that is created by the technician initially is what matters and what the upperJaw and the lowerJaw stl files maintain, whereas the white coloring is just an exocad visualization feature, nothing more. 
+
+Some notes:
+- The zircon teeth must go under the gum just a hair thicknes, so tiny bit. 
+
+- the circule of the margin lines should be a bit wider, because if it is wide, the technician can still fix it during mining without redesign. 
+
+- zercon cases are the most frequent cases - avraging 10 cases per day 
+
+- mostly indivual teeth rather than multiple teeth needs fixing - about 30% of prepped teeth are neighbours. 
+
+-  In the case of having multiple teeth waxup files: like 34-35-37, the dentist requires them to be connected instead of single zicoun tooth, that is why we have single toth waxup stl file, and multiple teeth single waxup file.
+
+
+Most clinic current work involve:
+- ziron, implants, veener. 
+
+Zircon are most freuqnet. 
+Veneer are rare: 2 cases per day on average. Let's not talk about this for now.
+implamnts are less than zircon and more than veneer. 
+
+
+- There are less frequent cases where the patiant needs a bridge to fill an empty tooth instead of a plant. Here, the margins for the empty tooth are not as significant. But we must clarify so that the model doesn't find it weird. 
+
+
+Edge cases for our training:
+- veneer cases have edges in the middle of the tooth, I will attach an image to explain this visually. 
+
+----------
+
+- drwaing the edge under the gum depends on the detnists, and the lab technician accumulate understading of each dentist and how they work and how the prepp the tooth. After that, they receive a case from doctor A, do more preparation making an edge under the gum for the prepped tooth, and then scann it again, and then deliver it to the designers. 
+
+
+
